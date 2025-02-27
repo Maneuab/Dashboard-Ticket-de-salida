@@ -19,11 +19,9 @@ from dash import Output, Input
 # Define el alcance de la API
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
-# Crea las credenciales y el servicio de Drive
-credentials = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-service = build('drive', 'v3', credentials=credentials)
-
+# Cargar credenciales desde la variable de entorno
+creds_json = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
+credentials = service_account.Credentials.from_service_account_info(creds_json)
 
 # ID de la carpeta compartida
 folder_id = '1O1LrNyYThQKXQ0aWzx3TGdK1pmwdb-5C'
