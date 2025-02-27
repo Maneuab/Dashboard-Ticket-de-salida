@@ -2,7 +2,6 @@ import dash
 from dash import dcc, html, Input, Output
 import plotly.express as px
 import pandas as pd
-from wordcloud import WordCloud
 import base64
 from io import BytesIO
 import matplotlib.pyplot as plt
@@ -247,33 +246,7 @@ df_students = df.groupby("Dirección de correo electrónico")["Mi satisfacción 
 df_students = df_students.rename(columns={"Mi satisfacción con la clase fue...": "Puntaje Promedio"})
 df_students = df_students.sort_values(by="Puntaje Promedio", ascending=True)
 
-# Función para generar nube de palabras excluyendo conectores
-def generate_wordcloud(text):
-    stopwords = set(["de", "la", "que", "el", "en", "y", "a", "los", "del", "las", "un", "por", "con", "una", "su", "para", "es", "al",
-    "lo", "como", "más", "o", "pero", "sus", "le", "ya", "me", "si", "sin", "sobre", "este", "ya", "también", "entre",
-    "cuando", "muy", "sin", "mi", "hasta", "desde", "porque", "qué", "cada", "nos", "durante", "todos", "uno", "bien",
-    "poco", "momento", "casi", "otro", "otra", "tanto", "dentro", "pues", "entonces", "así", "aunque", "hacia", "después",
-    "antes", "según", "algunos", "algunas", "nosotros", "vosotros", "ellos", "ellas", "usted", "ustedes", "esto", "aquello",
-    "esas", "esos", "aquellos", "aquellas", "algo", "nada", "siempre", "nunca", "tampoco", "además", "seguro", "cierto",
-    "parece", "posible", "imposible", "luego", "igual", "quizás", "tal", "cual", "ahora", "mientras", "tan", "sino",
-    "verdad", "obvio", "evidente", "propio", "cualquier", "cierta", "ciertos", "ciertas", "pues", "entonces", "dicho",
-    "realmente", "general", "particular", "etc", "cosa", "cosas", "bueno", "buen", "malo", "mal", "gran", "grande",
-    "todo", "ninguna", "no", "parte", "claro", "según", "varios", "duda", "parecido", "explicación", "tema", "concepto"])
-    wordcloud = WordCloud(width=800, height=400, background_color='white', stopwords=stopwords).generate(text)
-    img = BytesIO()
-    plt.figure(figsize=(10, 6))
-    plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis("off")
-    plt.savefig(img, format='png')
-    plt.close()
-    img.seek(0)
-    return base64.b64encode(img.getvalue()).decode()
 
-quejas_text = " ".join(df["¿Qué parte de la clase te resultó más difícil de comprender y por qué?"].dropna().astype(str))
-sugerencias_text = " ".join(df["¿Cómo puedo ayudarte a comprender mejor el tema avanzado?"].dropna().astype(str))
-
-wordcloud_quejas = generate_wordcloud(quejas_text)
-wordcloud_sugerencias = generate_wordcloud(sugerencias_text)
 
 # Inicializar la aplicación Dash
 app = dash.Dash(__name__)
