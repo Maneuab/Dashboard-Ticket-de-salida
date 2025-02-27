@@ -19,6 +19,15 @@ import os
 import io
 import re
 import jupyter_dash
+import json
+from google.oauth2 import service_account
+
+# Cargar credenciales desde la variable de entorno
+creds_json = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
+credentials = service_account.Credentials.from_service_account_info(creds_json)
+# Cargar credenciales desde la variable de entorno
+#creds_json = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
+#credentials = service_account.Credentials.from_service_account_info(creds_json)
 
 #from dash import dev_tools
 
