@@ -1,10 +1,3 @@
-!pip install dash
-
-!pip install --upgrade dash
-
-!pip install jupyter_dash # install jupyter_dash module
-
-
 import dash
 from dash import dcc, html, Input, Output
 import plotly.express as px
