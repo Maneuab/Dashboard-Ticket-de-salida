@@ -2,6 +2,7 @@ dash
 jupyter_dash
 pandas
 plotly
+matplotlib
 gunicorn
 google-auth
 google-auth-oauthlib
