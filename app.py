@@ -1,5 +1,3 @@
-!pip install google-colab
-
 !pip install dash
 
 !pip install --upgrade dash
