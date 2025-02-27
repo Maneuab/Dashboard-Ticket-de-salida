@@ -192,4 +192,5 @@ def update_preguntas(selected_materia):
 if __name__ == '__main__':
     app.run_server(debug=True)
 
+server = app.server  # Necesario para Gunicorn en Render
 
