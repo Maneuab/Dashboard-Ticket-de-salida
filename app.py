@@ -20,8 +20,13 @@ from dash import Output, Input
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
 # Cargar credenciales desde la variable de entorno
-creds_json = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
-credentials = service_account.Credentials.from_service_account_info(creds_json)
+creds_json = os.getenv('GOOGLE_CREDENTIALS')
+
+if creds_json:
+    creds_dict = json.loads(creds_json)
+    credentials = service_account.Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
+else:
+    raise ValueError("Las credenciales de Google no están definidas en la variable de entorno.")
 
 # Construir el servicio de Google Drive
 service = build('drive', 'v3', credentials=credentials)
