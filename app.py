@@ -23,6 +23,9 @@ SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 creds_json = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
 credentials = service_account.Credentials.from_service_account_info(creds_json)
 
+# Construir el servicio de Google Drive
+service = build('drive', 'v3', credentials=credentials)
+
 # ID de la carpeta compartida
 folder_id = '1O1LrNyYThQKXQ0aWzx3TGdK1pmwdb-5C'
 
