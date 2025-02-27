@@ -82,12 +82,6 @@ df_grouped = df_grouped.sort_values(by="Puntaje Promedio", ascending=False)
 #print(df_grouped)
 
 
-# Identificar estudiantes con mayores dificultades
-df_dificultades = df[df["¿Qué parte de la clase te resultó más difícil de comprender y por qué?"].notna()]
-df_dificultades_count = df_dificultades["Dirección de correo electrónico"].value_counts().reset_index()
-df_dificultades_count.columns = ["Correo Electrónico", "Cantidad de Reportes"]
-
-
 # Procesar datos de satisfacción agrupando por materia
 df_grouped = df.groupby("Materia")["Mi satisfacción con la clase fue..."].agg(["mean", "count"])
 df_grouped = df_grouped.rename(columns={"mean": "Puntaje Promedio", "count": "Número de Respuestas"}).reset_index()
